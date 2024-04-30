@@ -13,56 +13,87 @@ class ViewController: UIViewController {
         super.viewDidLoad()
         // Do any additional setup after loading the view.
         p1Lives = 20
-        p2Lives = 20
+       // p2Lives = 20
+        numPlayers = 4
+        numPlayersText.text = "Number of Players: \(numPlayers)"
         lifeCount1.text = "Life Count: \(p1Lives)"
-        lifeCount2.text = "Life Count: \(p2Lives)"
+        //lifeCount2.text = "Life Count: \(p2Lives)"
         loses.isHidden = true
+        playerWarning.isHidden = true
     }
-    var p1Lives = 20
-    var p2Lives = 20
     
+    var numPlayers = 4
+    var p1Lives = 20
+    //var p2Lives = 20
+    
+    @IBOutlet weak var numPlayersText: UILabel!
     @IBOutlet weak var lifeCount1: UILabel!
     @IBOutlet weak var lifeCount2: UILabel!
-       
+    
+    @IBOutlet weak var playerWarning: UILabel!
+    
+    func updateNumPlayers(){
+        numPlayersText.text = "Number of Players: \(numPlayers)"
+    }
+    @IBAction func addPlayers(_ sender: Any){
+        if numPlayers <= 7 {
+            numPlayers += 1
+            updateNumPlayers()
+            playerWarning.isHidden = true
+        } else{
+            playerWarning.text = "Can have a max of 8 Player"
+            playerWarning.isHidden = false
+        }
+    }
+    @IBAction func subtractPlayers(_ sender: Any){
+        if numPlayers >= 3 {
+            numPlayers -= 1
+            updateNumPlayers()
+            playerWarning.isHidden = true
+        } else{
+            playerWarning.text = "Can have a min of 2 Player"
+            playerWarning.isHidden = false
+        }
+    }
     
     func updateLifeCount1() {
         lifeCount1.text = "Life Count: \(p1Lives)"
         gameOver()
     }
-    func updateLifeCount2() {
-        lifeCount2.text = "Life Count: \(p2Lives)"
-        gameOver()
-    }
+//    func updateLifeCount2() {
+//        lifeCount2.text = "Life Count: \(p2Lives)"
+//        gameOver()
+//    }
     
     //+1
     @IBAction func addLife1(_ sender: Any) {
         p1Lives += 1
         updateLifeCount1()
     }
-    @IBAction func addLife2(_ sender: Any) {
-        p2Lives += 1
-        updateLifeCount2()
-    }
+//    @IBAction func addLife2(_ sender: Any) {
+//        p2Lives += 1
+//        updateLifeCount2()
+//    }
     
     //+5
     @IBAction func add5Lives1(_ sender: Any) {
         p1Lives += 5
         updateLifeCount1()
     }
-    @IBAction func add5Lives2(_ sender: Any) {
-        p2Lives += 5
-        updateLifeCount2()
-    }
+//    @IBAction func add5Lives2(_ sender: Any) {
+//        p2Lives += 5
+//        updateLifeCount2()
+//    }
     
     // -1
     @IBAction func subtratctLife1(_ sender: Any) {
         p1Lives -= 1
         updateLifeCount1()
     }
-    @IBAction func subtratctLife2(_ sender: Any) {
-        p2Lives -= 1
-        updateLifeCount2()
-    }
+//    @IBAction func subtratctLife2(_ sender: Any) {
+//        p2Lives -= 1
+//        updateLifeCount2()
+//    }
     
     //-5
     @IBAction func subtract5Lives1(_ sender: Any) {
@@ -70,10 +101,10 @@ class ViewController: UIViewController {
         updateLifeCount1()
     }
     
-    @IBAction func subtract5Lives2(_ sender: Any) {
-        p2Lives -= 5
-        updateLifeCount2()
-    }
+//    @IBAction func subtract5Lives2(_ sender: Any) {
+//        p2Lives -= 5
+//        updateLifeCount2()
+//    }
    
     @IBOutlet weak var loses: UILabel!
     
@@ -82,10 +113,10 @@ class ViewController: UIViewController {
             loses.text = "Player 1 LOSES!"
             loses.isHidden = false
         }
-        else if p2Lives <= 0{
-            loses.text = "Player 2 LOSES!"
-            loses.isHidden = false
-        }
+//        else if p2Lives <= 0{
+//            loses.text = "Player 2 LOSES!"
+//            loses.isHidden = false
+//        }
     }
 
 }
